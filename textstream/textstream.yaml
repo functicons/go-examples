@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: textstream
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: textstream
+    spec:
+      containers:
+      - name: textstream
+        image: functicons/textstream
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: textstream
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+  selector:
+    app: textstream
